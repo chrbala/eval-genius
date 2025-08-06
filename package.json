@@ -6,7 +6,7 @@
   "repository": "https://github.com/chrbala/eval-genius",
   "exports": {
     ".": {
-      "types": "./dist/main.d.ts",
+      "types": "./dist/eval-genius.d.ts",
       "import": "./dist/eval-genius.js",
       "require": "./dist/eval-genius.cjs"
     },
