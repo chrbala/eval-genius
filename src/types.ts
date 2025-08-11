@@ -38,6 +38,7 @@ type GeniusConfig<
   TRenderedFields extends string,
   TRendered extends Rendered<TRenderedFields>,
 > = {
+  concurrent?: boolean;
   vitest: typeof Vitest;
   metadata: {
     /**

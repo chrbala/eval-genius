@@ -3,6 +3,8 @@ import { GoogleSheetsExporter } from "../src/GoogleSheetsExporter";
 import { describe } from "vitest";
 import * as vitest from "vitest";
 
+const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
+
 [
   { label: "control", execute: (value: string) => value.toUpperCase() },
   {
@@ -12,6 +14,7 @@ import * as vitest from "vitest";
 ].forEach(({ label, execute }) => 
   describe(`my-test [${label}]`, () => genius({
     vitest,
+    concurrent: true,
     metadata: {
       name: "my-test",
       label,
@@ -32,7 +35,9 @@ import * as vitest from "vitest";
     },
     task: {
       execute,
-      test: (expect, { rendered, expected, output }) => {
+      test: async (expect, { rendered, expected, output }) => {
+        await delay(100);
+
         /**
          * Use the rendered values to represent the values sent to the exporter
          */

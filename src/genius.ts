@@ -3,6 +3,7 @@ import type { Genius, Reporter } from "./types";
 
 export const genius: Genius = async ({
   vitest,
+  concurrent,
   metadata,
   data: getData,
   task,
@@ -47,8 +48,12 @@ export const genius: Genius = async ({
       for (const reporter of reporters) await reporter.flush();
   };
 
+  const { test, expect } = concurrent
+    ? { test: vitest.test.concurrent, expect: {...vitest.expect, soft: vitest.expect} }
+    : { test: vitest.test, expect: vitest.expect };
+
   for (const { name, input, expected, only } of data)
-    vitest.test(name, { only }, async ({ onTestFinished }) => {
+    test(name, { only }, async ({ onTestFinished }) => {
       onTestFinished(handleQueuePop);
 
       const output = await task.execute(input);
@@ -58,7 +63,7 @@ export const genius: Genius = async ({
         expected,
       });
 
-      const _assertions = task.test(vitest.expect, {
+      const _assertions = task.test(expect as typeof vitest.expect, {
         input,
         output,
         expected,

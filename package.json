@@ -34,7 +34,8 @@
     "release:interactive": "yarn build && yarn publish",
     "release": "yarn run release:interactive --patch",
     "release:minor": "yarn run release:interactive --minor",
-    "release:major": "yarn run release:interactive --major"
+    "release:major": "yarn run release:interactive --major",
+    "release:rc": "yarn run release:interactive --prepatch --tag=rc"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",
