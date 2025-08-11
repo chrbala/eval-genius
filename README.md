@@ -43,7 +43,7 @@ describe("my-test", () =>
      * expect() because expect.soft() does not work with 
      * concurrent tests in Vitest. Defaults to false.
      */
-    concurrent: true;
+    concurrent: true,
     metadata: {
       /**
        * The name of the functionality under evaluation.
