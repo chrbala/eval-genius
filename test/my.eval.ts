@@ -43,7 +43,7 @@ const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
          */
         expect
           .soft(rendered.capitalizesCorrectly, "capitalizes correctly")
-          .toBe(true);
+          .toBe(1);
 
         /**
          * For more complex comparisons, error messages are clearer if the expect() call makes the comparison directly
