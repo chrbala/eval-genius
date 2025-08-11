@@ -37,6 +37,13 @@ import { describe } from "vitest";
 describe("my-test", () =>
   genius({
     vitest,
+    /**
+     * Runs tests concurrently according to the vitest 
+     * maxConcurrency setting. Switches expect.soft() with 
+     * expect() because expect.soft() does not work with 
+     * concurrent tests in Vitest. Defaults to false.
+     */
+    concurrent: true;
     metadata: {
       /**
        * The name of the functionality under evaluation.

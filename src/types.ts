@@ -38,6 +38,9 @@ type GeniusConfig<
   TRenderedFields extends string,
   TRendered extends Rendered<TRenderedFields>,
 > = {
+  /**
+   * Runs tests concurrently. Switches expect.soft() with expect() because expect.soft() does not work with concurrent tests in Vitest.
+   */
   concurrent?: boolean;
   vitest: typeof Vitest;
   metadata: {
