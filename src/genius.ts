@@ -49,7 +49,16 @@ export const genius: Genius = async ({
   };
 
   const { test, expect } = concurrent
-    ? { test: vitest.test.concurrent, expect: {...vitest.expect, soft: vitest.expect} }
+    ? {
+        test: vitest.test.concurrent,
+        expect: new Proxy(vitest.expect, {
+          get: (target, prop) => {
+            if (prop === "soft") return target;
+            // @ts-expect-error
+            return target[prop];
+          },
+        }),
+      }
     : { test: vitest.test, expect: vitest.expect };
 
   for (const { name, input, expected, only } of data)
